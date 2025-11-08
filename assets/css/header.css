@@ -13,19 +13,18 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  transition: all 0.4s ease; /* アニメーション */
-  overflow: hidden; /* コンテンツを切る */
+  transition: width 0.4s ease, padding 0.4s ease;
+  overflow: hidden; /* コンテンツを隠す */
 }
 
-/* 閉じた状態 */
+/* === 閉じた状態 === */
 .site-header.collapsed {
-  width: 3rem; /* toggleボタンだけ入るサイズに */
-  justify-content: flex-end; /* 右側に寄せる */
-  padding-right: 0.5rem;
-  transform: translateX(calc(50vw - 1.5rem)); /* 右に寄るよう調整 */
+  width: 3rem;              /* toggleボタン分だけの幅に */
+  padding-left: 0;          /* 左余白を消す */
+  padding-right: 0.5rem;    /* ボタン右余白だけ維持 */
 }
 
-/* collapsed時はナビなど非表示 */
+/* ナビやロゴなどを非表示に（フェードアウト） */
 .site-header.collapsed .nav-items,
 .site-header.collapsed .site-logo,
 .site-header.collapsed .other-content {
@@ -35,17 +34,18 @@
   transition: opacity 0.3s ease;
 }
 
-/* toggleボタンだけ残す */
-.site-header .toggle-btn {
+/* toggleボタン */
+.toggle-btn {
   background: none;
   border: none;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
+  flex-shrink: 0; /* ボタンが潰れないように固定 */
   transition: color 0.3s ease;
 }
 
-/* collapsed中でもtoggleボタンは常に表示 */
+/* collapsed中でも常に表示 */
 .site-header.collapsed .toggle-btn {
   opacity: 1;
   visibility: visible;
