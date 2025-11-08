@@ -10,15 +10,15 @@
   justify-content: space-between;
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 50%;
+  transform: translateX(50%);
   z-index: 1000;
   overflow: hidden;
   transition:
     width 0.45s ease,
-    transform 0.45s ease,
-    padding 0.45s ease;
-  transform-origin: right center; /* これがポイント */
+    padding 0.45s ease,
+    transform 0.45s ease;
+  transform-origin: right center; /* 右端を軸にする */
 }
 
 /* トグルボタンは常に右端 */
@@ -35,11 +35,12 @@
   z-index: 1100;
 }
 
-/* 閉じてるとき */
+/* 閉じてるとき（右端に吸い込まれる） */
 .site-header.collapsed {
-  width: 3rem; /* ボタン分だけ残す */
+  width: 3rem;
   padding-left: 0;
   padding-right: 0.5rem;
+  transform: translateX(0); /* ←右固定 */
 }
 
 /* 中のコンテンツをフェードアウト */
