@@ -1,93 +1,58 @@
-:root{
-  --header-full-width: 85vw;
-  --header-right-offset: 10vw;   /* ヘッダー右端の位置（ビューポート基準） */
-  --toggle-size: 2.4rem;         /* トグルの見た目サイズ（丸など） */
-  --collapsed-gap: 0.6rem;       /* トグルとヘッダー端の余白 */
-  --transition-fast: 0.28s;
-  --transition-slow: 0.4s;
-}
-
-/* 基本ヘッダー */
 .site-header {
-  position: fixed;
-  top: 0;
-  right: var(--header-right-offset);
-  width: var(--header-full-width);
-  margin-top: 10px;
-  padding: 0.5rem 1.2rem; /* 右側は余白を大きめにしておく */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* 左から並べる */
-  gap: 1rem;
   background-color: #1a2433;
   border-radius: 9999px;
+  width: 85vw;
+  margin-top: 10px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  overflow: hidden; /* 中の要素を切る */
-  transition: width var(--transition-slow) ease, padding var(--transition-slow) ease;
+  overflow: hidden;
+  transition:
+    width 0.45s ease,
+    transform 0.45s ease,
+    padding 0.45s ease;
 }
 
-/* トグルは絶対配置して右端に固定（ヘッダー内で動かない） */
-.site-header .toggle-btn {
+/* トグルボタン */
+.toggle-btn {
   position: absolute;
-  right: var(--collapsed-gap);
+  right: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
-  width: var(--toggle-size);
-  height: var(--toggle-size);
-  min-width: var(--toggle-size);
-  min-height: var(--toggle-size);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
   background: none;
   border: none;
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 1100; /* 中身より上 */
-  transition: transform var(--transition-fast) ease, opacity var(--transition-fast) ease;
-  flex-shrink: 0;
+  z-index: 1100;
 }
 
-/* ナビ等（左側のコンテンツ） */
-.nav-items {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  transition: opacity var(--transition-fast) ease, transform var(--transition-slow) ease;
-  will-change: opacity, transform;
+/* ナビなど他のコンテンツ */
+.nav-items,
+.site-logo,
+.other-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* 閉じた状態：ヘッダー幅をトグル分だけにする（+余白） */
+/* ==== 閉じた状態 ==== */
 .site-header.collapsed {
-  /* 最小幅 = トグル幅 + 左右の余白（ここでは右側余白はトグルで使う） */
-  width: calc(var(--toggle-size) + var(--collapsed-gap) * 2);
-  padding-left: 0.25rem;
-  padding-right: calc(var(--collapsed-gap) + 0.2rem);
+  width: 3rem; /* toggleボタンぶんだけ残す */
+  transform: translateX(calc(50vw - 1.5rem)); /* トグルボタンの下に吸い込まれる */
+  padding-left: 0;
+  padding-right: 0.5rem;
 }
 
-/* 左側のコンテンツは右へ押し込まれるように移動してフェードアウト */
+/* 左側コンテンツを右へ押し込んで消す */
 .site-header.collapsed .nav-items,
 .site-header.collapsed .site-logo,
 .site-header.collapsed .other-content {
   opacity: 0;
   pointer-events: none;
-  transform: translateX(40%); /* 右に押し込むように見せる */
-  visibility: hidden;
-}
-
-/* 開いたときは通常表示 */
-.site-header .nav-items,
-.site-header .site-logo,
-.site-header .other-content {
-  opacity: 1;
-  transform: translateX(0);
-  visibility: visible;
-}
-
-/* optional: ホバーやフォーカスで少し拡張させる */
-.site-header .toggle-btn:focus,
-.site-header .toggle-btn:hover {
-  transform: translateY(-50%) scale(1.05);
-  outline: none;
+  transform: translateX(30%);
 }
