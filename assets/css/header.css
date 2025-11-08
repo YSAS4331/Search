@@ -1,7 +1,7 @@
 .site-header {
-  background-color: #1a2433; /* #0f1724 より少し明るい */
-  border-radius: 9999px;     /* 横長丸 */
-  width: 85vw;               /* 80〜90% */
+  background-color: #1a2433;
+  border-radius: 9999px;
+  width: 85vw;
   margin: 0 auto;
   margin-top: 10px;
   padding: 0.5rem 1rem;
@@ -13,38 +13,40 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
+  transition: all 0.4s ease; /* アニメーション */
+  overflow: hidden; /* コンテンツを切る */
 }
 
-.nav-items {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: nowrap;
-  overflow: hidden;
+/* 閉じた状態 */
+.site-header.collapsed {
+  width: 3rem; /* toggleボタンだけ入るサイズに */
+  justify-content: flex-end; /* 右側に寄せる */
+  padding-right: 0.5rem;
+  transform: translateX(calc(50vw - 1.5rem)); /* 右に寄るよう調整 */
 }
 
-.nav-items a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+/* collapsed時はナビなど非表示 */
+.site-header.collapsed .nav-items,
+.site-header.collapsed .site-logo,
+.site-header.collapsed .other-content {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
 }
 
-.overflow-menu {
-  display: none;
-  cursor: pointer;
-  color: white;
-  font-size: 1.2rem;
-}
-
-.toggle-btn {
-  margin-left: auto;
+/* toggleボタンだけ残す */
+.site-header .toggle-btn {
   background: none;
   border: none;
   color: white;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* ヘッダーが閉じているとき */
-.site-header.collapsed .nav-items {
-  display: none;
+/* collapsed中でもtoggleボタンは常に表示 */
+.site-header.collapsed .toggle-btn {
+  opacity: 1;
+  visibility: visible;
 }
