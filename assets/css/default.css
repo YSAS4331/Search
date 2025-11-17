@@ -1,0 +1,4 @@
+input[type="text"]{position:relative;width:260px;max-width:100%;background:var(--card);color:var(--text-main);padding:0.6rem 1rem;border-radius:10px;border:2px solid transparent;outline:none;user-select:none;transition:border-color 0.25s,box-shadow 0.25s;}
+input[type="text"]:not(.NoBorder):focus{border-color:rgba(79,163,255,0.6);box-shadow:0 0 0 3px rgba(79,163,255,0.25);}
+input[type="text"]::placeholder{color:var(--text-sub);opacity:0.7;}
+input[type="text"]:disabled{background:var(--card-disabled);color:var(--text-disabled);cursor:not-allowed;}
