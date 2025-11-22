@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="./assets/css/default.css">
     <link rel="stylesheet" href="./assets/css/header.css">
+    <script src="./assets/js/search.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -15,5 +16,16 @@
     <main class="flex center">
       <input type="text" id="searchValue" placeholder="Search...">
     </main>
+    <script>
+      const input = document.querySelector('#searchValue');
+      input.addEventListener('keydown', async e => {
+        if (e.key.toLowerCase() === 'enter') {
+          const key = input.value.trim();
+          if (!key) return;
+          const result = await window.search(key);
+          alert(JSON.stringify(result));
+        }
+      });
+    </script>
   </body>
 </html>
