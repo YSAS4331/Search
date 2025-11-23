@@ -18,6 +18,7 @@
       <input type="text" id="searchValue" placeholder="Search...">
     </main>
     <script>
+      try {
       const input = document.querySelector('#searchValue');
       input.addEventListener('keydown', async e => {
         if (e.key.toLowerCase() === 'enter') {
@@ -27,6 +28,9 @@
           alert(JSON.stringify(result));
         }
       });
+      } catch (e) {
+        alert(e);
+      }
     </script>
   </body>
 </html>
