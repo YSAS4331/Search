@@ -94,7 +94,7 @@
   // 検索メイン
   // ======================
   async function search(key) {
-    const res = await fetch('/Index.json');
+    const res = await fetch('https://ysas4331.github.io/search/Index.json');
     const data = await res.json();
 
     const tokens = tokenize(key);
